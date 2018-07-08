@@ -8,17 +8,21 @@
     </head>
     <body>
         <div id="app">
-            <ul>
+            <ul v-if="showData">
                 <li v-for="(show, index) in tvshows" :key="index">
                     <strong>{{ show.name }}</strong> ({{show.seasons}} seasons)
                 </li>
             </ul>
+            <div v-else>
+                No data
+            </div>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
         <script>
             const app = new Vue({
                 el: '#app',
                 data: {
+                    showData: true,
                     tvshows: [
                         { name: 'Game of Thrones', seasons: 7},
                         { name: 'Breaking Bad', seasons: 5},
