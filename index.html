@@ -10,9 +10,12 @@
         <div id="app">
             <button @click="changeVisibility">{{ textButton }}</button>
             <ul v-if="showData">
-                <li v-for="(show, index) in tvshows" :key="index">
-                    <strong>{{ show.name }}</strong> ({{show.seasons}} seasons)
-                </li>
+                <tv-show 
+                    v-for="(show, index) in tvshows" 
+                    :key="index"
+                    :name="show.name"
+                    :seasons="show.seasons">
+                </tv-show>
             </ul>
             <div v-else>
                 No data
@@ -20,6 +23,18 @@
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.js"></script>
         <script>
+            Vue.component('tv-show', {
+                props: {
+                    name: String,
+                    seasons: Number
+                },
+                template:`
+                    <li>
+                        <strong>{{ name }}</strong> ({{seasons}} seasons)
+                    </li>
+                `
+            });
+
             const app = new Vue({
                 el: '#app',
                 data: {
@@ -38,7 +53,7 @@
                         this.textButton = this.showData ? 'Hide data' : 'Show data';
                     }
                 }
-            })
+            });
         </script>
     </body>
 </html>
